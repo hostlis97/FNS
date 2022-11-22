@@ -1,30 +1,17 @@
 import java.util.Scanner;
 
 public class Main {
-    public static double usnIncome(int income) {
-        double tax = income * 0.06;
-        return tax;
-    }
-
-    public static double usnIncomeMinusExpenditure(int income, int expenditure) {
-        double tax = (income - expenditure) * 15 / 100;
-        if (tax <= 0) {
-            System.out.println("Ваши расходы привышают доходы!");
-            return 0;
-        }
-        return tax;
-    }
 
     public static void usnIncomeVsUsnIncomeMinusExpenditure(int usnIncome, int usnIncomeMinusExpenditure) {
         if (usnIncome > usnIncomeMinusExpenditure) {
             System.out.println("Мы советуем вам УСН доходы минус расходы");
             System.out.println("Ваш налог составит: " + usnIncomeMinusExpenditure + " рублей");
-            System.out.println("Экономия: " + (usnIncome - usnIncomeMinusExpenditure) + " рублей");
+            System.out.println("Экономия: " + Calc.economy(usnIncomeMinusExpenditure, usnIncome) + " рублей");
         } else {
             System.out.println("Мы советуем вам УСН доходы");
             System.out.println("Ваш налог составит: " + usnIncome + " рублей");
             System.out.println("Налог на другой системе: " + usnIncomeMinusExpenditure + " рублей");
-            System.out.println("Экономия: " + (usnIncomeMinusExpenditure - usnIncome) + " рублей.");
+            System.out.println("Экономия: " + Calc.economy(usnIncomeMinusExpenditure, usnIncome) + " рублей.");
         }
 
     }
@@ -56,8 +43,8 @@ public class Main {
                     expenditure += Integer.parseInt(s.nextLine());
                     break;
                 case 3:
-                    usnIncome = (int) usnIncome(income);
-                    usnIncomeMinusExpenditure = (int) usnIncomeMinusExpenditure(income, expenditure);
+                    usnIncome = (int) Calc.usnIncome(income);
+                    usnIncomeMinusExpenditure = (int) Calc.usnIncomeMinusExpenditure(income, expenditure);
                     if (usnIncomeMinusExpenditure == 0) {
                         break;
                     }
